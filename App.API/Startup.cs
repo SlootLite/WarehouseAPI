@@ -19,6 +19,9 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using App.Domain.Mapping.ProductMapping;
+using App.API.Middleware;
+using System.Net.Mime;
+using App.API.Responses;
 
 namespace App.API
 {
@@ -31,7 +34,6 @@ namespace App.API
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<WarehouseContext>(c =>
@@ -50,7 +52,6 @@ namespace App.API
             });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -59,6 +60,8 @@ namespace App.API
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Warehouse.API v1"));
             }
+
+            app.UseMiddleware(typeof(ErrorHandlingMiddleware));
 
             app.UseHttpsRedirection();
 
