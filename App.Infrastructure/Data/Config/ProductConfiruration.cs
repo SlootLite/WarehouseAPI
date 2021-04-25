@@ -1,4 +1,4 @@
-﻿using App.Domain.Entities;
+﻿using App.Domain.Entities.ProductAggregate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace App.Infrastructure.Config
+namespace App.Infrastructure.Data.Config
 {
-    public class WarehouseConfiguration : IEntityTypeConfiguration<Warehouse>
+    public class ProductConfiruration : IEntityTypeConfiguration<Product>
     {
-        public void Configure(EntityTypeBuilder<Warehouse> builder)
+        public void Configure(EntityTypeBuilder<Product> builder)
         {
             builder.Property(s => s.Id)
                 .IsRequired()

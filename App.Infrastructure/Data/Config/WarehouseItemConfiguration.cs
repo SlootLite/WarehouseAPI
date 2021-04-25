@@ -1,4 +1,4 @@
-﻿using App.Domain.Entities;
+﻿using App.Domain.Entities.WarehouseAggregate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -7,19 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace App.Infrastructure.Config
+namespace App.Infrastructure.Data.Config
 {
-    public class ProductConfiruration : IEntityTypeConfiguration<Product>
+    public class WarehouseItemConfiguration : IEntityTypeConfiguration<WarehouseItem>
     {
-        public void Configure(EntityTypeBuilder<Product> builder)
+        public void Configure(EntityTypeBuilder<WarehouseItem> builder)
         {
             builder.Property(s => s.Id)
                 .IsRequired()
                 .UseIdentityColumn();
 
-            builder.Property(s => s.Name)
-                .IsRequired()
-                .HasMaxLength(300);
+            builder.Property(s => s.Quantity)
+                .IsRequired();
         }
     }
 }
