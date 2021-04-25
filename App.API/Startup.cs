@@ -27,17 +27,20 @@ namespace App.API
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IWebHostEnvironment env, IConfiguration configuration)
         {
             Configuration = configuration;
+            Environment = env;
         }
 
         public IConfiguration Configuration { get; }
+        public IWebHostEnvironment Environment { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<WarehouseContext>(c =>
-                c.UseSqlServer(Configuration.GetConnectionString("WarehouseConnection")));
+            if(!Environment.EnvironmentName.Equals("Testing"))
+                services.AddDbContext<WarehouseContext>(c =>
+                    c.UseSqlServer(Configuration.GetConnectionString("WarehouseConnection")));
 
             services.AddAutoMapper(typeof(WarehouseProfile), typeof(ProductProfile));
 

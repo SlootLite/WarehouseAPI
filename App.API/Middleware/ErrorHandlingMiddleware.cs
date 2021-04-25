@@ -41,12 +41,12 @@ namespace App.API.Middleware
 
             if (exception is ItemAlreadyExistException)
             {
-                message = exception.Message;
+                message = $"{nameof(ItemAlreadyExistException)}: {exception.Message}";
                 status = HttpStatusCode.BadRequest;
             }
             else if (exception is ItemNotFoundException)
             {
-                message = exception.Message;
+                message = $"{nameof(ItemNotFoundException)}: {exception.Message}";
                 status = HttpStatusCode.BadRequest;
             }
             else

@@ -17,6 +17,7 @@ namespace App.API.Configurations
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
             services.AddScoped<IWarehouseService, WarehouseService>();
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IWarehouseItemService, WarehouseItemService>();
             return services;
         }
     }
